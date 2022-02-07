@@ -1,36 +1,30 @@
 import React from 'react';
+import Header from "./Header";
+import Tasks from "./Tasks";
+import {filterType} from "./App";
+
 
 type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
+    removeTask: (taskID:number) => void
+    changeFilter:(filter:filterType) => void
+
 }
 
 export type TaskType = {
     id: number
     title: string
-    iDone: boolean
+    isDone: boolean
+
+
 }
 
-const TodoList = (props:TodoListPropsType) => {
+const TodoList = (props: TodoListPropsType) => {
     return (
         <div>
-            <div>
-                <h3>{props.title}</h3>
-                <div>
-                    <input/>
-                    <button>+</button>
-                </div>
-                <ul>
-                    <li><input type="checkbox" checked={props.tasks[0].iDone}/> <span>{props.tasks[0].title}</span></li>
-                    <li><input type="checkbox" checked={props.tasks[1].iDone}/> <span>{props.tasks[1].title}</span></li>
-                    <li><input type="checkbox" checked={props.tasks[2].iDone}/> <span>{props.tasks[2].title}</span></li>
-                </ul>
-                <div>
-                    <button>All</button>
-                    <button>Active</button>
-                    <button>Completed</button>
-                </div>
-            </div>
+            <Header title={props.title}/>
+            <Tasks changeFilter={props.changeFilter} tasks={props.tasks} removeTask={props.removeTask}/>
         </div>
     );
 };

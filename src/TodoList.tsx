@@ -8,7 +8,8 @@ type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (taskID:number) => void
-    changeFilter:(filter:filterType) => void
+    changeFilter: (filter:filterType) => void
+
 
 }
 
@@ -20,11 +21,11 @@ export type TaskType = {
 
 }
 
-const TodoList = (props: TodoListPropsType) => {
+function TodoList(props: TodoListPropsType){
     return (
         <div>
             <Header title={props.title}/>
-            <Tasks changeFilter={props.changeFilter} tasks={props.tasks} removeTask={props.removeTask}/>
+            <Tasks  changeFilter={props.changeFilter} tasks={props.tasks} removeTask={props.removeTask}/>
         </div>
     );
 };

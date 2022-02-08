@@ -1,7 +1,7 @@
 import React from 'react';
 import {filterType} from "./App";
 type ControlButtonsType = {
-    changeFilter:(filter:filterType) => void
+    changeFilter: (filter:filterType) => void
 }
 
 const ControlButtons = (props:ControlButtonsType) => {

@@ -7,7 +7,7 @@ import {filterType} from "./App";
 type TasksPropsType = {
     tasks: Array<TaskType>
     removeTask: (taskID:number) => void
-    changeFilter:(filter:filterType) => void
+    changeFilter: (filter:filterType) => void
 }
 
 
@@ -18,7 +18,7 @@ const Tasks = (props: TasksPropsType) => {
             <ul>
                 { tasksComponents }
             </ul>
-            <ControlButtons changeFilter={props.changeFilter}/>
+            <ControlButtons changeFilter={props.changeFilter} />
         </div>
 
     );

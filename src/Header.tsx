@@ -11,7 +11,7 @@ const Header = (props: HeaderPropsType) => {
             <h3>{props.title}</h3>
             <div>
                 <input/>
-                <button>+</button>
+                <button>v</button>
             </div>
         </div>
     )

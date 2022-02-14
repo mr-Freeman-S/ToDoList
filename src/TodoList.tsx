@@ -7,15 +7,15 @@ import {filterType} from "./App";
 type TodoListPropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTask: (taskID:number) => void
+    removeTask: (taskID:string) => void
     changeFilter: (filter:filterType) => void
-    addedNewTask: (task:string) => void
+    addNewTask: (task:string) => void
 
 
 }
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 
@@ -25,7 +25,7 @@ export type TaskType = {
 function TodoList(props: TodoListPropsType){
     return (
         <div>
-            <Header addedNewTask={props.addedNewTask} title={props.title}/>
+            <Header addNewTask={props.addNewTask} title={props.title}/>
             <Tasks  changeFilter={props.changeFilter} tasks={props.tasks} removeTask={props.removeTask}/>
         </div>
     );

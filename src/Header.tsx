@@ -4,18 +4,19 @@ import task from "./Task";
 import {TaskType} from "./TodoList";
 import Input from "./components/Input";
 import Button from "./components/Button";
+import AddTaskForm from "./components/AddTaskForm";
 
 
 type HeaderPropsType = {
     title: string
-    addedNewTask: (task:string) => void
+    addNewTask: (task:string) => void
 }
 
 const Header = (props: HeaderPropsType) => {
     let [title, setTitle] = useState<string>('')
 
     const onClickButtonHandler = () => {
-        props.addedNewTask(title)
+        props.addNewTask(title)
         setTitle('')
     }
 
@@ -23,8 +24,7 @@ const Header = (props: HeaderPropsType) => {
     return (
         <div>
             <h3>{props.title}</h3>
-            <Input title={title} setTitle={setTitle}/>
-            <Button name={'+'} callBack={onClickButtonHandler}/>
+            <AddTaskForm addNewTask={props.addNewTask} onClickButtonHandler={onClickButtonHandler}/>
         </div>
     )
 };

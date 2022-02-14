@@ -6,7 +6,7 @@ import {filterType} from "./App";
 
 type TasksPropsType = {
     tasks: Array<TaskType>
-    removeTask: (taskID:number) => void
+    removeTask: (taskID:string) => void
     changeFilter: (filter:filterType) => void
 }
 

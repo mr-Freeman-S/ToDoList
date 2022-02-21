@@ -6,3 +6,11 @@
 .App > div {
   margin-right: 50px;
 }
+
+.completedTask {
+  opacity: 0.5;
+}
+
+.isActiveButton {
+  background: chartreuse;
+}

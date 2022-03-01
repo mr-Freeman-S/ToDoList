@@ -7,10 +7,18 @@
   margin-right: 50px;
 }
 
-.completedTask {
-  opacity: 0.5;
+.error {
+  border: red 1px solid;
 }
 
-.isActiveButton {
-  background: chartreuse;
+.error-message {
+  color: red;
+}
+
+.active-filter {
+  background-color: aquamarine;
+}
+
+.is-done {
+  opacity: 0.5;
 }

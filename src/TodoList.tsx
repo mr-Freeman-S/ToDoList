@@ -8,17 +8,16 @@ export type TaskType = {
 }
 
 type PropsType = {
+    todoListID:string
     title: string
     tasks: Array<TaskType>
-    removeTask: (todoListID: string, taskId: string) => void
-    changeFilter: (todoListID: string, value: FilterValuesType) => void
-    addTask: (todoListID: string, title: string) => void
-    changeTaskStatus: (todoListID: string, taskId: string, isDone: boolean) => void
+    removeTask: (todoListID:string,taskId: string) => void
+    changeFilter: (todoListID:string,value: FilterValuesType) => void
+    addTask: (todoListID:string,title: string) => void
+    changeTaskStatus: (todoListID:string,taskId: string, isDone: boolean) => void
     filter: FilterValuesType
-    todoListID: string
-    removeTodoListHandler: (todoListID: string) => void
-
 }
+
 export function Todolist(props: PropsType) {
 
     let [title, setTitle] = useState("")
@@ -49,13 +48,8 @@ export function Todolist(props: PropsType) {
     const onCompletedClickHandler = () => props.changeFilter(props.todoListID,"completed");
 
 
-
-
     return <div>
-        <h3>
-            {props.title}
-        <button onClick={()=>props.removeTodoListHandler(props.todoListID)}>X</button>
-        </h3>
+        <h3>{props.title}</h3>
         <div>
             <input value={title}
                    onChange={onChangeHandler}

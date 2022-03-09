@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import Input from "./components/Input";
+import {TaskType, TodoList} from "./TodoList";
 
 export type FilterValuesType = "all" | "active" | "completed";
 type TodolistType = {
@@ -113,7 +113,7 @@ function App() {
                         tasksForTodolist = allTodolistTasks.filter(t => t.isDone);
                     }
 
-                    return <Todolist
+                    return <TodoList
                         key={tl.id}
                         id={tl.id}
                         title={tl.title}
@@ -125,6 +125,7 @@ function App() {
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
                         updateTask={updateTasks}
+                        updateTodoTitle={updateTodoTitle}
                     />
                 })
             }

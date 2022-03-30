@@ -12,7 +12,7 @@ export const todolistsReducer = (state: Array<TodolistType>, action: todolistsRe
         }
         case "ADD-TODOLIST": {
             // let newTodolistId = v1();
-            let newTodolist: TodolistType = {id: v1(), title: action.payload.title, filter: 'all'};
+            let newTodolist: TodolistType = {id: action.payload.todoID, title: action.payload.title, filter: 'all'};
             // setTodolists([newTodolist, ...todolists]);
             return [...state, newTodolist]
         }
@@ -48,7 +48,8 @@ export const addTodolistAC = (newTodolistTitle: string) => {
     return {
         type: 'ADD-TODOLIST',
         payload: {
-            title: newTodolistTitle
+            title: newTodolistTitle,
+            todoID:v1()
         }
     } as const
 }

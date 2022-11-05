@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import {TaskType, TodoList} from './TodoList';
+import {TaskType, Todolist} from './Todolist';
 import {v1} from 'uuid';
 import {AddItemForm} from './AddItemForm';
 import {AppBar, Button, Container, Grid, IconButton, Paper, Toolbar, Typography} from '@material-ui/core';
@@ -152,7 +152,7 @@ function App() {
 
                             return <Grid item>
                                 <Paper style={{padding: "10px"}}>
-                                    <TodoList
+                                    <Todolist
                                         key={tl.id}
                                         id={tl.id}
                                         title={tl.title}

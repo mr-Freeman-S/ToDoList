@@ -16,10 +16,13 @@ import LinearProgress from "@mui/material/LinearProgress";
 import {useAppSelector} from "./store";
 import {RequestStatusType} from "./appReducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
+import Login from "../features/Login/Login";
+// @ts-ignore
+import {Route, Routes} from "react-router-dom";
 
 
 function App() {
-const status = useAppSelector<RequestStatusType>(state=> state.app.status)
+    const status = useAppSelector<RequestStatusType>(state => state.app.status)
     return (
         <div className="App">
             <AppBar position="static">
@@ -36,7 +39,11 @@ const status = useAppSelector<RequestStatusType>(state=> state.app.status)
             {(status === 'loading') && <LinearProgress color="secondary"/>}
 
             <Container fixed>
-                <TodolistsList/>
+                <Routes>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/" element={<TodolistsList/>}/>
+                </Routes>
+
             </Container>
             <ErrorSnackbar/>
         </div>

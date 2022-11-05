@@ -2,7 +2,7 @@ export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 // loading - покащываем крутилку
 // idle , succeeded , failed  - не показываем крутилку
 const initialState = {
-    status: 'loading' as RequestStatusType,
+    status: 'idle' as RequestStatusType,
     error: null as string | null
 }
 

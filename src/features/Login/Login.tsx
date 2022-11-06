@@ -5,49 +5,43 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useFormik} from "formik";
+import {Copyright} from "../Footer/Copyright";
+import * as Yup from "yup"
 
-function Copyright(props: any) {
-    return (
-        <Typography variant="body2" color="text.secondary" align="center" {...props}>
-            {'Copyright © '}
-            <Link color="inherit" href="">
-                Your Website
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
+type initialStateTypeFormik = {
+    email: string
+    password:string
+    rememberMe:boolean
+    captcha?: boolean
 }
 
 const theme = createTheme();
 
 export default function SignIn() {
-    const formik = useFormik({
+    const SignInSchema = Yup.object().shape({
+        password: Yup.string()
+            .min(8, 'Too Short!')
+            .max(50, 'Too Long!')
+            .required('Required'),
+        email: Yup.string().email('Invalid email').required('Required'),
+    });
+
+    const formik = useFormik<initialStateTypeFormik>({
         initialValues: {
             email: '',
             password: '',
             rememberMe: false,
-            captcha: true
-        },
+        },validationSchema:SignInSchema,
         onSubmit: values => {
             alert(JSON.stringify(values, null, 2));
         },
     });
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -79,6 +73,9 @@ export default function SignIn() {
                             autoFocus
                             onChange={formik.handleChange}
                             value={formik.values.email}
+                            error={formik.touched.email && Boolean(formik.errors.email)}
+                            helperText={formik.touched.email && formik.errors.email}
+
                         />
                         <TextField
                             margin="normal"
@@ -91,6 +88,8 @@ export default function SignIn() {
                             autoComplete="current-password"
                             onChange={formik.handleChange}
                             value={formik.values.password}
+                            error={formik.touched.password && Boolean(formik.errors.password)}
+                            helperText={formik.touched.password && formik.errors.password}
                         />
                         <FormControlLabel
                             control={<Checkbox onChange={formik.handleChange}

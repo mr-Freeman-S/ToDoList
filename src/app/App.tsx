@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './App.css'
 import {TodolistsList} from '../features/TodolistsList/TodolistsList'
 
@@ -16,13 +16,19 @@ import LinearProgress from "@mui/material/LinearProgress";
 import {useAppSelector} from "./store";
 import {RequestStatusType} from "./appReducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import Login from "../features/Login/Login";
-// @ts-ignore
-import {Route, Routes} from "react-router-dom";
+import {redirect, Route, Routes} from "react-router-dom";
+import {Login} from "../features/Login/Login";
+import {useDispatch} from "react-redux";
+import {logoutTC} from "../features/Login/auth-reducer";
 
 
 function App() {
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
+    const isLogin = useAppSelector<boolean>(state => state.auth.isLogin)
+    const dispatch = useDispatch()
+
+
+
     return (
         <div className="App">
             <AppBar position="static">
@@ -33,14 +39,16 @@ function App() {
                     <Typography variant="h6">
                         News
                     </Typography>
-                    <Button color="inherit">Login</Button>
+                    <Button onClick={() => {
+                        dispatch(logoutTC())
+                    }} color="inherit">Login</Button>
                 </Toolbar>
             </AppBar>
             {(status === 'loading') && <LinearProgress color="secondary"/>}
 
             <Container fixed>
                 <Routes>
-                    <Route path="/login" element={<Login/>}/>
+                    < Route path="/login" element={<Login/>}/>
                     <Route path="/" element={<TodolistsList/>}/>
                 </Routes>
 

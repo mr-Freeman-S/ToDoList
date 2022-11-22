@@ -13,17 +13,26 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useFormik} from "formik";
 import {Copyright} from "../Footer/Copyright";
 import * as Yup from "yup"
+import {useDispatch} from "react-redux";
+import {loginMeTC} from "./auth-reducer";
+import {useAppSelector} from "../../app/store";
+import {redirect, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 type initialStateTypeFormik = {
     email: string
-    password:string
-    rememberMe:boolean
+    password: string
+    rememberMe: boolean
     captcha?: boolean
 }
 
 const theme = createTheme();
 
-export default function SignIn() {
+export const Login = () => {
+    const dispatch = useDispatch()
+    const isLogin = useAppSelector(state => state.auth.isLogin)
+    const navigate = useNavigate()
+
     const SignInSchema = Yup.object().shape({
         password: Yup.string()
             .min(8, 'Too Short!')
@@ -37,11 +46,18 @@ export default function SignIn() {
             email: '',
             password: '',
             rememberMe: false,
-        },validationSchema:SignInSchema,
+        }, validationSchema: SignInSchema,
         onSubmit: values => {
+            dispatch(loginMeTC(values))
             alert(JSON.stringify(values, null, 2));
         },
     });
+
+    useEffect(()=> {
+        if(isLogin) {
+            return navigate('/')
+        }
+    },[isLogin])
 
     return (
         <ThemeProvider theme={theme}>

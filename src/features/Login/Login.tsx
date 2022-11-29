@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,8 +17,7 @@ import * as Yup from "yup"
 import {useDispatch} from "react-redux";
 import {loginMeTC} from "./auth-reducer";
 import {useAppSelector} from "../../app/store";
-import {redirect, useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 type initialStateTypeFormik = {
     email: string
@@ -28,7 +28,7 @@ type initialStateTypeFormik = {
 
 const theme = createTheme();
 
-export const Login = () => {
+export const Login:React.FC = () => {
     const dispatch = useDispatch()
     const isLogin = useAppSelector(state => state.auth.isLogin)
     const navigate = useNavigate()
@@ -49,15 +49,14 @@ export const Login = () => {
         }, validationSchema: SignInSchema,
         onSubmit: values => {
             dispatch(loginMeTC(values))
-            alert(JSON.stringify(values, null, 2));
         },
     });
 
-    useEffect(()=> {
-        if(isLogin) {
+    useEffect(() => {
+        if (isLogin) {
             return navigate('/')
         }
-    },[isLogin])
+    }, [isLogin, navigate])
 
     return (
         <ThemeProvider theme={theme}>
@@ -77,6 +76,8 @@ export const Login = () => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
+                    <p>test account : <br/>
+                    login :</p>
                     <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"

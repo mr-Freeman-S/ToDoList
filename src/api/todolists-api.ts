@@ -13,8 +13,15 @@ export type loginParamsType = {
     email: string, password: string, rememberMe: boolean
 }
 export const authAPI = {
-    loginMe(data:loginParamsType) {
-        return instance.post<loginParamsType,AxiosResponse<ResponseType<{userId:number}>>>('/auth/login',data)
+    authMe() {
+        return instance.get<ResponseType<{
+            id: number
+            email: string
+            login: string
+        }>>('/auth/me')
+    },
+    loginMe(data: loginParamsType) {
+        return instance.post<loginParamsType, AxiosResponse<ResponseType<{ userId: number }>>>('/auth/login', data)
     },
     logout() {
         return instance.delete<ResponseType>('/auth/login')

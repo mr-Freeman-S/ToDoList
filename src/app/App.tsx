@@ -16,18 +16,20 @@ import LinearProgress from "@mui/material/LinearProgress";
 import {useAppSelector} from "./store";
 import {RequestStatusType} from "./appReducer";
 import {ErrorSnackbar} from "../components/ErrorSnackbar/ErrorSnackbar";
-import {redirect, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Login} from "../features/Login/Login";
 import {useDispatch} from "react-redux";
-import {logoutTC} from "../features/Login/auth-reducer";
+import {authMeTC, logoutTC} from "../features/Login/auth-reducer";
 
 
-function App() {
+const App = () => {
+
     const status = useAppSelector<RequestStatusType>(state => state.app.status)
-    const isLogin = useAppSelector<boolean>(state => state.auth.isLogin)
     const dispatch = useDispatch()
 
-
+    useEffect(() => {
+        dispatch(authMeTC())
+    },[dispatch])
 
     return (
         <div className="App">
@@ -41,7 +43,7 @@ function App() {
                     </Typography>
                     <Button onClick={() => {
                         dispatch(logoutTC())
-                    }} color="inherit">Login</Button>
+                    }} color="inherit">logout</Button>
                 </Toolbar>
             </AppBar>
             {(status === 'loading') && <LinearProgress color="secondary"/>}

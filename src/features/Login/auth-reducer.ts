@@ -36,6 +36,25 @@ enum ResultCodeStatuses {
 }
 
 // thunks
+
+export const authMeTC = () => (dispatch: Dispatch<ActionsType>) => {
+    dispatch(setAppStatusAC("loading"))
+    authAPI.authMe()
+        .then((res) => {
+            if (res.data.resultCode === ResultCodeStatuses.success) {
+                dispatch(setLogged(true))
+                dispatch(setAppStatusAC("succeeded"))
+                redirect('/')
+            } else {
+                handleServerAppError(res.data, dispatch)
+            }
+        })
+        .catch((err: AxiosError) => {
+                handleServerNetworkError(dispatch, err.message)
+            }
+        )
+}
+
 export const loginMeTC = (data: loginParamsType) => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC("loading"))
     authAPI.loginMe(data)

@@ -18,6 +18,7 @@ import {useDispatch} from "react-redux";
 import {loginMeTC} from "./auth-reducer";
 import {useAppSelector} from "../../app/store";
 import {useNavigate} from "react-router-dom";
+import {FormLabel} from "@mui/material";
 
 type initialStateTypeFormik = {
     email: string
@@ -35,7 +36,7 @@ export const Login:React.FC = () => {
 
     const SignInSchema = Yup.object().shape({
         password: Yup.string()
-            .min(8, 'Too Short!')
+            .min(4, 'Too Short!')
             .max(50, 'Too Long!')
             .required('Required'),
         email: Yup.string().email('Invalid email').required('Required'),
@@ -76,8 +77,15 @@ export const Login:React.FC = () => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <p>test account : <br/>
-                    login :</p>
+                    <FormLabel>
+                        <p>
+                            To log in get registered <a href={"https://social-network.samuraijs.com/"}
+                                                        target={"_blank"} rel={"noreferrer"}> here</a>
+                        </p>
+                        <p>or use common test account credentials:</p>
+                        <p>Email: free@samuraijs.com</p>
+                        <p>Password: free</p>
+                    </FormLabel>
                     <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{mt: 1}}>
                         <TextField
                             margin="normal"

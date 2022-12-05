@@ -78,18 +78,18 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsT
         .catch((err: AxiosError) => handleServerNetworkError(dispatch, err.message))
 }
 export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: Dispatch<ActionsType>) => {
-    dispatch(setLoadingTaskAC(todolistId,taskId,true))
+    dispatch(setLoadingTaskAC(todolistId, taskId, true))
 
     todolistsAPI.deleteTask(todolistId, taskId)
         .then(res => {
             if (res.data.resultCode === ResultCodeStatuses.success) {
                 const action = removeTaskAC(taskId, todolistId)
                 dispatch(action)
-                dispatch(setLoadingTaskAC(todolistId,taskId,false))
+                dispatch(setLoadingTaskAC(todolistId, taskId, false))
 
             } else {
                 handleServerAppError<{}>(res.data, dispatch)
-                dispatch(setLoadingTaskAC(todolistId,taskId,false))
+                dispatch(setLoadingTaskAC(todolistId, taskId, false))
 
             }
         })

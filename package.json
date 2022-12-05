@@ -1,6 +1,6 @@
 {
-  "name": "todo15v2",
-  "version": "0.1.0",
+  "name": "todo-app",
+  "version": "0.1.1",
   "homepage": "https://mr-Freeman-S.github.io/ToDoList",
   "private": true,
   "dependencies": {

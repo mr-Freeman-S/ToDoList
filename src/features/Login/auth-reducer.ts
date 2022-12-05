@@ -6,8 +6,7 @@ import {AxiosError} from "axios";
 import {redirect} from "react-router-dom";
 
 
-
-const initialState:authStateType = {
+const initialState: authStateType = {
     isLogin: false
 }
 
@@ -36,7 +35,6 @@ enum ResultCodeStatuses {
 }
 
 // thunks
-
 export const authMeTC = () => (dispatch: Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC("loading"))
     authAPI.authMe()
@@ -92,7 +90,6 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
 
 
 // types
-
 type authStateType = {
     isLogin: boolean
 }

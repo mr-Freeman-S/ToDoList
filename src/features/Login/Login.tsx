@@ -29,7 +29,7 @@ type initialStateTypeFormik = {
 
 const theme = createTheme();
 
-export const Login:React.FC = () => {
+export const Login: React.FC = () => {
     const dispatch = useDispatch()
     const isLogin = useAppSelector(state => state.auth.isLogin)
     const navigate = useNavigate()

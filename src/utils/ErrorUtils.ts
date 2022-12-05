@@ -3,8 +3,7 @@ import {AppActionsType, setAppStatusAC, setErrorAC} from "../app/appReducer";
 import {ResponseType} from "../api/todolists-api";
 
 
-
-export const handleServerNetworkError    = (dispatch:Dispatch<AppActionsType>,message:string) => {
+export const handleServerNetworkError = (dispatch: Dispatch<AppActionsType>, message: string) => {
     dispatch(setAppStatusAC("failed"))
     dispatch(setErrorAC(message))
 }
@@ -16,10 +15,4 @@ export const handleServerAppError = <T>(data: ResponseType<T>, dispatch: Dispatc
     }
     dispatch(setAppStatusAC('failed'))
 }
-// generic function
-/*
-function f5<T>(a:T):T{
-    return a
-}
-f5<string>(1)
-f5('sad')*/
+

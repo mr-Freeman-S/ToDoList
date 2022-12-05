@@ -1,7 +1,7 @@
 import {todolistsAPI, TodolistType} from '../../api/todolists-api'
 import {Dispatch} from 'redux'
 import {RequestStatusType, setAppStatusAC, setAppStatusType, setErrorAC, setErrorACType} from "../../app/appReducer";
-import {Axios, AxiosError} from "axios";
+import {AxiosError} from "axios";
 import {handleServerNetworkError} from "../../utils/ErrorUtils";
 
 const initialState: Array<TodolistDomainType> = []
@@ -53,7 +53,7 @@ export const fetchTodolistsTC = () => {
                 dispatch(setTodolistsAC(res.data))
                 dispatch(setAppStatusAC("succeeded"))
             })
-            .catch((err:AxiosError)=> handleServerNetworkError(dispatch,err.message))
+            .catch((err: AxiosError) => handleServerNetworkError(dispatch, err.message))
     }
 }
 export const removeTodolistTC = (todolistId: string) => {
@@ -65,7 +65,7 @@ export const removeTodolistTC = (todolistId: string) => {
                 dispatch(removeTodolistAC(todolistId))
                 dispatch(setEntityStatus(todolistId, 'succeeded'))
             })
-            .catch((err:AxiosError)=> {
+            .catch((err: AxiosError) => {
                 handleServerNetworkError(dispatch, err.message)
                 dispatch(setEntityStatus(todolistId, "failed"))
             })
@@ -85,7 +85,7 @@ export const addTodolistTC = (title: string) => {
                 }
 
             })
-            .catch((err:AxiosError)=> handleServerNetworkError(dispatch,err.message))
+            .catch((err: AxiosError) => handleServerNetworkError(dispatch, err.message))
     }
 }
 export const changeTodolistTitleTC = (id: string, title: string) => {
@@ -96,7 +96,7 @@ export const changeTodolistTitleTC = (id: string, title: string) => {
                 dispatch(setAppStatusAC("succeeded"))
                 dispatch(changeTodolistTitleAC(id, title))
             })
-            .catch((err:AxiosError)=> handleServerNetworkError(dispatch,err.message))
+            .catch((err: AxiosError) => handleServerNetworkError(dispatch, err.message))
     }
 }
 
@@ -105,7 +105,7 @@ export type AddTodolistActionType = ReturnType<typeof addTodolistAC>;
 export type RemoveTodolistActionType = ReturnType<typeof removeTodolistAC>;
 export type SetTodolistsActionType = ReturnType<typeof setTodolistsAC>;
 export type setEntityStatusType = ReturnType<typeof setEntityStatus>;
- type ActionsType =
+type ActionsType =
     | RemoveTodolistActionType
     | AddTodolistActionType
     | ReturnType<typeof changeTodolistTitleAC>
